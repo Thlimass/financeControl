@@ -18,10 +18,10 @@ const btnRestart = document.querySelector("#btnRestart");
  }
 
  // Função para atualizar a tabela com as items
- function atualizarTabela() {
-     let corpoTabela = document.getElementById("corpoTabela");
+ function updateTable() {
+     let bdTable = document.getElementById("bdTable");
      // Limpar o conteúdo anterior da tabela
-     corpoTabela.innerHTML = "";
+     bdTable.innerHTML = "";
      // Adicionar cada despesa à tabela
      items.forEach((valor, index) => {
          let tr = document.createElement("tr");
@@ -29,52 +29,52 @@ const btnRestart = document.querySelector("#btnRestart");
              <td>Dia ${index + 1}</td>
              <td>R$ ${valor.toFixed(2)}</td>
              <td class="columnAction">
-               <button onclick="editarDespesa(${index})"><i class='bx bx-edit-alt'></i></button>
+               <button onclick="editExpenses(${index})"><i class='bx bx-edit-alt'></i></button>
              </td>
          `;
          tbody.appendChild(tr);
      });
      // Após atualizar a tabela, calcular e exibir a soma total e a média diária
-     exibirResultados();
+     displayResults();
  }
 
  // Função para calcular e exibir a soma total e a média diária
- function exibirResultados() {
+ function displayResults() {
      // Calcular a soma total
-     let somaTotal = items.reduce((total, valor) => total + valor, 0);
+     let totalSum = items.reduce((total, valor) => total + valor, 0);
      // Calcular a média diária
-     let mediaDiaria = somaTotal / 7;
+     let dailyAverage = totalSum / 7;
      // Exibir os resultados nas divs correspondentes
-     document.getElementById("somaTotal").textContent = `R$ ${somaTotal.toFixed(2)}`;
-     document.getElementById("mediaDiaria").textContent = `R$ ${mediaDiaria.toFixed(2)}`;
+     document.getElementById("totalSum").textContent = `R$ ${totalSum.toFixed(2)}`;
+     document.getElementById("dailyAverage").textContent = `R$ ${dailyAverage.toFixed(2)}`;
      // Exibir as divs de resultado
      document.getElementById("somaTotal").style.display = "block";
-     document.getElementById("mediaDiaria").style.display = "block";
+     document.getElementById("dailyAverage").style.display = "block";
  }
 
  // Função para editar o valor de uma despesa
- function editarDespesa(index) {
-     let novoValor;
+ function editExpenses(index) {
+     let newValue;
      do {
-         novoValor = parseFloat(prompt(`Digitems o novo valor da despesa para o Dia ${index + 1}:`));
-         if (isNaN(novoValor)) {
+         newValue = parseFloat(prompt(`Digite o novo valor da despesa para o Dia ${index + 1}:`));
+         if (isNaN(newValue)) {
              alert("Por favor, insira um valor válido.");
          }
-     } while (isNaN(novoValor));
-     items[index] = novoValor;
+     } while (isNaN(newValue));
+     items[index] = newValue;
      // Atualizar a tabela com o novo valor editado
-     atualizarTabela();
+     updateTable();
  }
 
  // Função para reiniciar o programa
- function reiniciar() {
+ function restart() {
      // Limpar o array de items
      items = [];
      // Reiniciar o loop para solicitar os valores da semana
      for (let i = 0; i < 7; i++) {
          let valor;
          do {
-             valor = parseFloat(prompt(`Digitems o valor da despesa para o Dia ${i + 1}:`));
+             valor = parseFloat(prompt(`Digite o valor da despesa para o Dia ${i + 1}:`));
              if (isNaN(valor)) {
                  alert("Por favor, insira um valor válido.");
              }
@@ -82,8 +82,8 @@ const btnRestart = document.querySelector("#btnRestart");
          items.push(valor);
      }
      // Atualizar a tabela
-     atualizarTabela();
+     updateTable();
  }
 
  // Chamar a função para inicializar a tabela
- atualizarTabela();
+ updateTable();
