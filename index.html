@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador de Despesas</title>
     <link rel="stylesheet" type="text/css" href="styless.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
     <main>
         <h2 class="textTitle">Gerenciador de Despesas</h2>
 
         <div class="divTable">
-            <table id="tabelaDespesas">
+            <table>
                 <thead>
                     <tr>
                         <th>Descrição</th>
@@ -20,29 +22,30 @@
                         <th class="columnAction">Editar</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="corpoTabela">
                     <!-- As linhas da tabela serão adicionadas aqui -->
                 </tbody>
             </table>
         </div>
-        
-    <div class="resume">
-        <div> 
-            Total:
-            <span id="somaTotal" class="total"></span>
+
+        <div class="resume">
+            <div>
+                Total:
+                <span id="somaTotal" class="total"></span>
+            </div>
+            <div>
+                Média por dia:
+                <span id="mediaDiaria" class="average"></span>
+            </div>
         </div>
-        <div>
-            Média por dia:
-            <span id="mediaDiaria" class="average"></span>
-        </div>
-    </div>
-       
-    
-    
+
+
+
         <button class="btnRestart" id="btnRestart" onclick="reiniciar()">Reiniciar</button>
     </main>
-    
+
 
     <script src="script.js"></script>
 </body>
+
 </html>
