@@ -1,5 +1,9 @@
- // Array para armazenar os valores das despesas
- let despesas = [];
+const tbody = document.querySelector("tbody");
+const amount = document.querySelector("#amount");
+const btnRestart = document.querySelector("#btnRestart");
+
+ // Array para armazenar os valores das items
+ let items = [];
 
  // Loop para solicitar o valor de cada dia da semana
  for (let i = 0; i < 7; i++) {
@@ -10,18 +14,18 @@
              alert("Por favor, insira um valor válido.");
          }
      } while (isNaN(valor));
-     despesas.push(valor);
+     items.push(valor);
  }
 
- // Função para atualizar a tabela com as despesas
+ // Função para atualizar a tabela com as items
  function atualizarTabela() {
      let corpoTabela = document.getElementById("corpoTabela");
      // Limpar o conteúdo anterior da tabela
      corpoTabela.innerHTML = "";
      // Adicionar cada despesa à tabela
-     despesas.forEach((valor, index) => {
-         let linha = document.createElement("tr");
-         linha.innerHTML = `
+     items.forEach((valor, index) => {
+         let tr = document.createElement("tr");
+         tr.innerHTML = `
              <td>Dia ${index + 1}</td>
              <td>R$ ${valor.toFixed(2)}</td>
              <td class="columnAction">
@@ -37,7 +41,7 @@
  // Função para calcular e exibir a soma total e a média diária
  function exibirResultados() {
      // Calcular a soma total
-     let somaTotal = despesas.reduce((total, valor) => total + valor, 0);
+     let somaTotal = items.reduce((total, valor) => total + valor, 0);
      // Calcular a média diária
      let mediaDiaria = somaTotal / 7;
      // Exibir os resultados nas divs correspondentes
@@ -52,30 +56,30 @@
  function editarDespesa(index) {
      let novoValor;
      do {
-         novoValor = parseFloat(prompt(`Digite o novo valor da despesa para o Dia ${index + 1}:`));
+         novoValor = parseFloat(prompt(`Digitems o novo valor da despesa para o Dia ${index + 1}:`));
          if (isNaN(novoValor)) {
              alert("Por favor, insira um valor válido.");
          }
      } while (isNaN(novoValor));
-     despesas[index] = novoValor;
+     items[index] = novoValor;
      // Atualizar a tabela com o novo valor editado
      atualizarTabela();
  }
 
  // Função para reiniciar o programa
  function reiniciar() {
-     // Limpar o array de despesas
-     despesas = [];
+     // Limpar o array de items
+     items = [];
      // Reiniciar o loop para solicitar os valores da semana
      for (let i = 0; i < 7; i++) {
          let valor;
          do {
-             valor = parseFloat(prompt(`Digite o valor da despesa para o Dia ${i + 1}:`));
+             valor = parseFloat(prompt(`Digitems o valor da despesa para o Dia ${i + 1}:`));
              if (isNaN(valor)) {
                  alert("Por favor, insira um valor válido.");
              }
          } while (isNaN(valor));
-         despesas.push(valor);
+         items.push(valor);
      }
      // Atualizar a tabela
      atualizarTabela();
