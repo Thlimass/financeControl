@@ -75,6 +75,14 @@ text-align: center;
     border: none;
 }
 
+.bx-edit-alt:before {
+    cursor: pointer;
+}
+
+.bx-edit-alt:hover {
+    color: red;
+}
+
 .columnAmount {
     width: 30%;
   }
@@ -84,8 +92,12 @@ text-align: center;
     color: white;
     border: none;
     padding: 0 15px;
+    margin-top: 15px;
     border-radius: 5px;
     cursor: pointer;
     height: 34px;
 }
 
+.btnRestart:hover {
+    background-color: green;
+}
