@@ -34,7 +34,7 @@ main {
     flex-wrap: wrap;
 }
 
-.resume>div {
+.resume > div {
 display: flex;
 flex-direction: column;
 box-shadow: 0px 0px 5px #ccc;
@@ -42,6 +42,12 @@ border-radius: 10px;
 padding: 10px;
 width: 150px;
 }
+
+.divTable {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 
 table {
     width: 98%;
@@ -68,6 +74,10 @@ text-align: center;
     background: transparent;
     border: none;
 }
+
+.columnAmount {
+    width: 30%;
+  }
 
 .btnRestart {
     background-color: #2c73d2;
