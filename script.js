@@ -2,13 +2,14 @@ const tbody = document.querySelector("tbody");
 const amount = document.querySelector("#amount");
 const btnRestart = document.querySelector("#btnRestart");
 
-let userName = prompt("Olá! Qual é o seu nome?");
-// Verificar se o usuário inseriu um nome
-if (userName) {
-    alert(`Olá, ${userName}! Bem-vindo ao Gerenciador de Despesas.`);
-} else {
-    alert("Olá! Bem-vindo ao Gerenciador de Despesas.");
-}
+    // Perguntar o nome do usuário novamente
+    let userName = prompt("Olá! Qual é o seu nome?");
+    // Verificar se o usuário inseriu um nome
+    if (userName) {
+        alert(`Olá, ${userName}! Bem-vindo ao Gerenciador de Despesas.`);
+    } else {
+        alert("Olá! Bem-vindo ao Gerenciador de Despesas.");
+    }
 
  // Array para armazenar os valores das items
  let items = [];
@@ -80,6 +81,16 @@ if (userName) {
 
  // Função para reiniciar o programa
  function restart() {
+
+        // Perguntar o nome do usuário novamente
+        let userName = prompt("Olá! Qual é o seu nome?");
+        // Verificar se o usuário inseriu um nome
+        if (userName) {
+            alert(`Olá, ${userName}! Bem-vindo ao Gerenciador de Despesas.`);
+        } else {
+            alert("Olá! Bem-vindo ao Gerenciador de Despesas.");
+        }
+
      // Limpar o array de items
      items = [];
      // Reiniciar o loop para solicitar os valores da semana
