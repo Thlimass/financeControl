@@ -1,40 +1,40 @@
-const tbody = document.querySelector("tbody");
-const amount = document.querySelector("#amount");
-const btnRestart = document.querySelector("#btnRestart");
-
-// Perguntar o nome do usuário novamente
-let userName = prompt("Olá! Qual é o seu nome?");
-// Verificar se o usuário inseriu um nome
-if (userName) {
-    alert(`Olá, ${userName}! Bem-vindo(a) ao Gerenciador de Despesas.`);
-} else {
-    alert("Olá! Bem-vindo ao Gerenciador de Despesas.");
-}
-
-// Array para armazenar os valores das items
-let items = [];
-
-// Loop para solicitar o valor de cada dia da semana
-for (let i = 0; i < 7; i++) {
-    let valor;
+// Função para solicitar um valor numérico positivo
+function promptPositiveNumber(message) {
+    let value;
     do {
-        valor = parseFloat(prompt(`Digite o valor da despesa para o Dia ${i + 1}:`));
-        if (isNaN(valor)) {
-            alert("Por favor, insira um valor válido.");
+        value = parseFloat(prompt(message));
+        if (isNaN(value) || value < 0) {
+            alert("Por favor, insira um valor numérico positivo válido.");
         }
-    } while (isNaN(valor));
-    items.push(valor);
-    // Exibir mensagem ao final do último valor inserido
-    if (i === 6) {
-        alert(`Obrigado, ${userName}! Suas despesas ao longo da semana serão exibidas.`);
-    }
+    } while (isNaN(value) || value < 0);
+    return value;
 }
 
-// Função para atualizar a tabela com as items
+// Função para solicitar o nome do usuário
+function askUserName() {
+    let name = prompt("Olá! Qual é o seu nome?");
+    if (!name) {
+        name = "Usuário"; // Definir um nome padrão se o usuário não inserir nenhum nome
+    }
+    return name;
+}
+
+// Função para solicitar os valores das despesas para cada dia da semana
+function promptExpenses() {
+    let items = [];
+    for (let i = 0; i < 7; i++) {
+        let value = promptPositiveNumber(`Digite o valor da despesa para o Dia ${i + 1}:`);
+        items.push(value);
+    }
+    return items;
+}
+
+// Função para atualizar a tabela com as despesas
 function updateTable() {
+    let tbody = document.querySelector("tbody");
     let bdTable = document.getElementById("bdTable");
     // Limpar o conteúdo anterior da tabela
-    bdTable.innerHTML = "";
+    tbody.innerHTML = "";
     // Adicionar cada despesa à tabela
     items.forEach((valor, index) => {
         let tr = document.createElement("tr");
@@ -67,13 +67,7 @@ function displayResults() {
 
 // Função para editar o valor de uma despesa
 function editExpenses(index) {
-    let newValue;
-    do {
-        newValue = parseFloat(prompt(`Digite o novo valor da despesa para o Dia ${index + 1}:`));
-        if (isNaN(newValue)) {
-            alert("Por favor, insira um valor válido.");
-        }
-    } while (isNaN(newValue));
+    let newValue = promptPositiveNumber(`Digite o novo valor da despesa para o Dia ${index + 1}:`);
     items[index] = newValue;
     // Atualizar a tabela com o novo valor editado
     updateTable();
@@ -81,36 +75,14 @@ function editExpenses(index) {
 
 // Função para reiniciar o programa
 function restart() {
-
-    // Perguntar o nome do usuário novamente
-    let userName = prompt("Olá! Qual é o seu nome?");
-    // Verificar se o usuário inseriu um nome
-    if (userName) {
-        alert(`Olá, ${userName}! Bem-vindo(a) ao Gerenciador de Despesas.`);
-    } else {
-        alert("Olá! Bem-vindo ao Gerenciador de Despesas.");
-    }
-
-    // Limpar o array de items
-    items = [];
-    // Reiniciar o loop para solicitar os valores da semana
-    for (let i = 0; i < 7; i++) {
-        let valor;
-        do {
-            valor = parseFloat(prompt(`Digite o valor da despesa para o Dia ${i + 1}:`));
-            if (isNaN(valor)) {
-                alert("Por favor, insira um valor válido.");
-            }
-        } while (isNaN(valor));
-        items.push(valor);
-        // Exibir mensagem ao final do último valor inserido
-        if (i === 6) {
-            alert(`Obrigado, ${userName}! Suas despesas ao longo da semana serão exibidas.`);
-        }
-    }
-    // Atualizar a tabela
+    let userName = askUserName();
+    items = promptExpenses();
+    alert(`Obrigado, ${userName}! Suas despesas ao longo da semana serão exibidas.`);
     updateTable();
 }
 
-// Chamar a função para inicializar a tabela
+// Perguntar o nome do usuário e iniciar o programa
+let userName = askUserName();
+let items = promptExpenses();
+alert(`Obrigado, ${userName}! Suas despesas ao longo da semana serão exibidas.`);
 updateTable();
